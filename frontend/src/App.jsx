@@ -3,7 +3,7 @@ import * as XLSX from "xlsx";
 
 const App = () => {
   const [items, setItems] = useState([]);
-  
+  const [filter,setFilter] = useState(false);
   const PostRequest = (sheet, values) => {
     console.log(sheet, values);
     return fetch(`http://localhost:8000/api/${sheet}`, {
@@ -56,7 +56,7 @@ const App = () => {
   };
 
   return (
-    <div className="container">
+    <div className="">
       <section className="heading text-center">
         <h4 className="text-center text-white p-4 bg-success">XLS Import and viewer</h4>
         <input
@@ -71,11 +71,16 @@ const App = () => {
       </section>
    
 
-  
+      <section className="container">
       {/* a toggle to change the worksheets accordingly*/}
+      <div className="text-center mt-4 mb-4">
+        {items.map((item, index) => (
         
-
-      {items?.slice().map((item, index) => {
+          <button className="btn btn-dark text-white rounded-0 me-1 px-1" onClick={() => setFilter({v:index,v1:index+1})}>{item?.sheetName}</button>
+        ))}
+        {items[0]?.data && <button className="btn btn-dark text-white rounded-0 me-1 px-1" onClick={() => setFilter(false)}>Show All</button> }
+      </div>
+      {items?.slice(filter.v,filter.v1).map((item, index) => {
         var {sheetName,data} = item;
         return (
           <div key={index} className="row mx-auto justify-content-center text-center">
@@ -109,6 +114,7 @@ const App = () => {
         );
       }
       )} 
+       </section>
     </div>
   );
 };
