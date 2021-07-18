@@ -3,6 +3,9 @@
 
 XLSX Reader is an web app which is built top of SheetJS
 
+![XLSX Reader](https://user-images.githubusercontent.com/40030019/126058660-2069ad8d-0ec1-43b3-9630-300bc87e55e4.png)
+
+
 ## What Works?
 
 - Can Import and View XLSX files
